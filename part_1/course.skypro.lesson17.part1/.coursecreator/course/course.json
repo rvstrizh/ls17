@@ -1,0 +1,166 @@
+{
+  "environment" : "unittest",
+  "summary" : "This is an introductory Python course.\n- The course will be most beneficial for beginner-level Python learners.\n- The course covers core Python features.\n- It contains hands-on examples of Python code implementation and exercises to practice new skills.\n- The course is based on the author's personal experience in Python development.",
+  "title" : "course.skypro.lesson17.part1",
+  "authors" : [
+    "Artur Karapetov"
+  ],
+  "programming_language" : "Python",
+  "language" : "en",
+  "course_type" : "PyCharm",
+  "items" : [
+    {
+      "title" : "restapi",
+      "task_list" : [
+        {
+          "name" : "task1",
+          "files" : {
+            "__init__.py" : {
+              "name" : "__init__.py",
+              "placeholders" : [ ],
+              "is_visible" : false,
+              "text" : ""
+            },
+            "tests/test_task.py" : {
+              "name" : "tests/test_task.py",
+              "placeholders" : [ ],
+              "is_visible" : false,
+              "text" : "import unittest\n\nfrom task import sum\n\n\n# todo: replace this with an actual test\nclass TestCase(unittest.TestCase):\n    def test_add(self):\n        self.assertEqual(sum(1, 2), 3, msg=\"adds 1 + 2 to equal 3\")\n"
+            },
+            "tests/__init__.py" : {
+              "name" : "tests/__init__.py",
+              "placeholders" : [ ],
+              "is_visible" : false,
+              "text" : ""
+            },
+            "task.py" : {
+              "name" : "task.py",
+              "placeholders" : [ ],
+              "is_visible" : true,
+              "text" : "# todo: replace this with an actual task\ndef sum(a, b):\n    return a + b\n"
+            }
+          },
+          "description_text" : "<html>\n\n<h2>Task Description: Tips & Tricks</h2>\n\n<p>This is a task description file.\nIts content will be displayed to a learner\nin the <strong>Task Description</strong> window.</p>\n\n<p>It supports both Markdown and HTML.\nTo toggle the format, you can rename <strong>task.md</strong>\nto <strong>task.html</strong>, or vice versa.\nThe default task description format can be changed\nin <strong>Preferences | Tools | Education</strong>,\nbut this will not affect any existing task description files.</p>\n\n<p>The following features are available in\n<strong>task.md/task.html</strong>\nwhich are specific to the EduTools plugin:</p>\n\n<ul>\n<li>Hints can be added anywhere in the task text.\nType \"hint\" and press Tab.\nHints should be added to an empty line in the task text.\nIn hints you can use both HTML and Markdown.\n<div class=\"hint\">Text of your hint</div></li>\n\n<li>You may need to refer your learners to a particular lesson,\ntask, or file. To achieve this, you can use the in-course links.\nSpecify the path using the <code>&lt;a href=\"course://lesson1/task1/file1\"&gt;\nlink_text&lt;/a&gt;</code> format.</li><br>\n\n<li>You can insert shortcuts in the task description.\nWhile <strong>task.html/task.md</strong> is open,\nright-click anywhere on the <strong>Editor</strong> tab\nand choose the <strong>Insert shortcut</strong> option\nfrom the context menu.\nFor example: &amp;shortcut:FileStructurePopup;.</li><br>\n\n<li>Insert the &percnt;<code>IDE_NAME</code>&percnt; macro,\nwhich will be replaced by the actual IDE name.\nFor example, <strong>%IDE_NAME%</strong>.</li><br>\n\n<li>Insert PSI elements, by using links like\n<code>&lt;a href=\"psi_element://link.to.element\"&gt;element description&lt;/a&gt;</code>.\nTo get such a link, right-click the class or method\nand select <strong>Copy Reference</strong>.\nThen press &amp;shortcut:EditorPaste;\nto insert the link where appropriate.\nFor example, a\n<a href=\"psi_element://java.lang.String#contains\">link to the \"contains\" method</a>.</li>\n</ul>\n</html>",
+          "description_format" : "HTML",
+          "feedback_link" : {
+            "link_type" : "STEPIK"
+          },
+          "task_type" : "edu"
+        }
+      ],
+      "type" : "lesson"
+    },
+    {
+      "title" : "serialization",
+      "task_list" : [
+        {
+          "name" : "task1",
+          "files" : {
+            "tests/test_task.py" : {
+              "name" : "tests/test_task.py",
+              "placeholders" : [ ],
+              "is_visible" : false,
+              "text" : "import json\nimport unittest\nfrom typing import List\n\nfrom task import get_json\n\n\n# todo: replace this with an actual test\nclass TestCase(unittest.TestCase):\n    def test_add(self):\n        glistjosn = get_json()\n        glistlistdict: List[dict] = json.loads(glistjosn)\n        for g in glistlistdict:\n            self.assertTrue(\"id\" in g.keys(), msg=\"Не верный JSON. Поля id нет в результирующем JSON\")\n            self.assertTrue(\"surname\" in g.keys(), msg=\"Не верный JSON. Поля surname нет в результирующем JSON\")\n            self.assertTrue(\"full_name\" in g.keys(), msg=\"Не верный JSON. Поля full_name нет в результирующем JSON\")\n            self.assertTrue(\"tours_count\" in g.keys(), msg=\"Не верный JSON. Поля tours_count нет в результирующем JSON\")\n            self.assertTrue(\"bio\" in g.keys(), msg=\"Не верный JSON. Поля bio нет в результирующем JSON\")\n            self.assertTrue(\"is_pro\" in g.keys(), msg=\"Не верный JSON. Поля is_pro нет в результирующем JSON\")\n            self.assertTrue(\"company\" in g.keys(), msg=\"Не верный JSON. Поля company нет в результирующем JSON\")\n"
+            },
+            "__init__.py" : {
+              "name" : "__init__.py",
+              "placeholders" : [ ],
+              "is_visible" : false,
+              "text" : ""
+            },
+            "tests/__init__.py" : {
+              "name" : "tests/__init__.py",
+              "placeholders" : [ ],
+              "is_visible" : false,
+              "text" : ""
+            },
+            "task.py" : {
+              "name" : "task.py",
+              "placeholders" : [ ],
+              "is_visible" : true,
+              "text" : "from flask import Flask\nfrom flask_sqlalchemy import SQLAlchemy\n\napp = Flask(__name__)\ndb = SQLAlchemy(app)\n\ndata = [{'user': 2, 'surname': 'Васечкин', 'full_name': 'Андрей Васечкин', 'tours_count': 5,\n         'bio': 'Я обожаю Москву, и изучаю город с необычных ракурсов. С радостью поделюсь с вами своими лучшими открытиями. Мы поднимемся на сталинские высотки и посмотрим на исторический центр сверху. Я покажу вам то, что скрыто от глаз большинства туристов и даже жителей города. Маршруты подобра индивидуально под ваш запрос. Для влюбленных доступна услуга свидания на крыше.',\n         'is_pro': True, 'company': 1},\n        {'user': 1, 'surname': 'Новикова', 'full_name': 'Людмила Новикова', 'tours_count': 2,\n         'bio': 'Я петербурженка в 7-м поколении. Люблю делиться историями и секретами дореволюционных петербургских зданий и особняков. Поделюсь историями моей бабушки. Вместе со мной работает небольшая дружная команда влюбленных в Петербург местных гидов. Мы раскроем вам секреты старинных домов и покажем то, что скрыто от глаз большинства туристов и жителей города.',\n         'is_pro': True, 'company': 2},\n        {'user': 3, 'surname': 'Беридзе', 'full_name': 'Георги Беридзе', 'tours_count': 5,\n         'bio': 'Филолог-журналист по образованию. За плечами более 9 лет экскурсий по Грузии и барменский опыт. Писатель. Перфекционист. И просто увлеченный человек. Родился и вырос в Тбилиси. Более 10-поколений тут. Люблю этот райский уголок на планете и свою работу. Мама-кулинар привила любовь ко вкусной еде.',\n         'is_pro': True, 'company': None},\n        {'user': 4, 'surname': 'Ласкина', 'full_name': 'Оксана Ласкина', 'tours_count': 2,\n         'bio': 'Я всегда увлекалась историей и, как следствие, получила образования гида-экскурсовода. С удовольствием знакомлю гостей города с историей, татарской культурой и традициями. Вы влюбитесь в наш край.',\n         'is_pro': True, 'company': 5},\n        {'user': 5, 'surname': 'Горячий', 'full_name': 'Иван Горячий', 'tours_count': 7,\n         'bio': 'Работал учителем истории более 10 лет, последние 5 лет живу в Сочи и уже третий год провожу экскурсии, орагнизовываю туры. На моих прогулках и турах вы узнаете не только об экскурсионных объектах, но и о том, чем живет современный Сочи: о ценах, недвижимости, об интересных местах города и его необычных заведениях. Есть туры разного уровня сложности и комфорта, где можно с детьми и без. Бесплатным бонусом ко всем экскурсиям станет фотосессия на зеркальный фотоаппарат.',\n         'is_pro': True, 'company': 4},\n        {'user': 6, 'surname': 'Ивлева', 'full_name': 'Яна Ивлева', 'tours_count': 5,\n         'bio': 'Я живу в Стамбуле много лет. По образованию филолог и историк. О Стамбуле читаю, пишу, живуэтим городом и люблю его. Раскрою его вам таким, какой он есть: великолепный, приветливый, неизменно интересный и всегда загадочный. Ваше путешествие по этому сказочному городу навсегда осталось в памяти и сердце. ',\n         'is_pro': True, 'company': 1},\n        {'user': 7, 'surname': 'Самидзе', 'full_name': 'Ирина Самидзе', 'tours_count': 1,\n         'bio': 'Живу в Риме уже более десяти лет и с каждым днем влюбляюсь в этот город все больше и больше. Моя миссия в том, чтобы и вы почувствовали после нашей прогулки то же самое. Приглашаю вас познакомиться с Вечным городом и увидеть его глазами местного жителя, прочувствовать всю атмосферу и колорит столицы. Насладиться видами, едой и историей этого города.',\n         'is_pro': False, 'company': None},\n        {'user': 8, 'surname': 'Ванькин', 'full_name': 'Владислав Ванькин', 'tours_count': 1,\n         'bio': 'Хеллоу! 11 лет писал для тревел-журналов, потом кризис среднего возраста, желание перемен и внезапный переезд в Псков, где впервые почувствовал себя дома. Провожу экскурсии-погружения по местам, которые не оставят вас равнодушным. Приглашаю вас в путешествие по Изборску и живописным окрестностям — на пару часов или дней. Показываю и открываю самые живописные тропы, знакомлю с местными жителями — фермерами и ремесленниками, а из множества исторических фактов — выбираю действительно важные и интересные ;)',\n         'is_pro': False, 'company': None},\n        {'user': 9, 'surname': 'Левинова', 'full_name': 'Дина Левинова', 'tours_count': 1,\n         'bio': 'Авторизированный гид, член Ассоциации профессиональных гидов Хельсинки, член клуба Знатоков города и рабочей комиссии университета. По жизни: живу в Финляндии 35 лет. 23 из них - работала в турсфере, а также гидом для души, т.к. очень люблю это дело. Исходила город вдоль и поперек, замучала рассказами родных и друзей, прочитала сотню, а то и больше книг, и провела сотни часов в архивах. Н не перестаю находить новые интересные факты, истории, места, которые и хочу показать гостям. Покажу город дркгим, не так как о его обычно показывают и описывают в экскурсияя на один день из Питера и пишут в большистве путеводителей. Открою вам новый Хельсинки, каким его вижу я: с плюсами и минусами, поделюсь радостными и печальными фактами истории, а также секретами, легендами, реалиями сегодняшнего дня.',\n         'is_pro': True, 'company': None},\n        {'user': 10, 'surname': 'Звонкий', 'full_name': 'Марк Звонкий', 'tours_count': 1,\n         'bio': 'Спорю, что такой экскурсии у вас еще не было. Я организую туры с закрытыми глазами. Да-да, вы все верно прочитали. Но какой в этом смыcл, если ничего не видно? Без одного из главных органов восприятия, город ощущается совсем иначе. Вас ждет по-настоящему необычное путешествие, которое надолго запомнится своими хорошими эмоциями.',\n         'is_pro': False, 'company': None}\n        ]\n\n\nclass Guide(db.Model):\n    __tablename__ = 'guide'\n    id = db.Column(db.Integer, primary_key=True)\n    surname = db.Column(db.String)\n    full_name = db.Column(db.String)\n    tours_count = db.Column(db.Integer)\n    bio = db.Column(db.String)\n    is_pro = db.Column(db.Boolean)\n    company = db.Column(db.Integer)\n\n\ndef get_json():\n    return\n"
+            }
+          },
+          "description_text" : "# Задание 1\n\nЕсть данные в списке словарей.\n\nЕсть модель описывающая сущность.\n\nНеобходимо перегнать данные в объекты класса модели с помощью marshmallow\n",
+          "description_format" : "MD",
+          "feedback_link" : {
+            "link_type" : "STEPIK"
+          },
+          "task_type" : "edu"
+        },
+        {
+          "name" : "task2",
+          "files" : {
+            "task.py" : {
+              "name" : "task.py",
+              "placeholders" : [ ],
+              "is_visible" : true,
+              "text" : "from flask import Flask\nfrom flask_sqlalchemy import SQLAlchemy\n\napp = Flask(__name__)\ndb = SQLAlchemy(app)\n\n\nclass Guide(db.Model):\n    __tablename__ = 'guide'\n    id = db.Column(db.Integer, primary_key=True)\n    surname = db.Column(db.String)\n    full_name = db.Column(db.String)\n    tours_count = db.Column(db.Integer)\n    bio = db.Column(db.String)\n    is_pro = db.Column(db.Boolean)\n    company = db.Column(db.Integer)\n\n\ndef get_json():\n    guide1 = Guide(id=2, surname='Васечкин', full_name='Андрей Васечкин', tours_count=5,\n                   bio='Я обожаю Москву, и изучаю город с необычных ракурсов.', is_pro=True, company=1)\n    guide2 = Guide(id=3, surname='Новикова', full_name='Людмила Новикова', tours_count=2,\n                   bio='Я петербурженка в 7-м поколении. Люблю делиться историями', is_pro=True, company=2)\n    guide3 = Guide(id=4, surname='Беридзе', full_name='Георги Беридзе', tours_count=5,\n                   bio='Филолог-журналист по образованию.', is_pro=True, company=None)\n\n    return\n"
+            },
+            "tests/test_task.py" : {
+              "name" : "tests/test_task.py",
+              "placeholders" : [ ],
+              "is_visible" : false,
+              "text" : "import json\nimport unittest\nfrom typing import List\n\nfrom task import get_json\n\n\n# todo: replace this with an actual test\nclass TestCase(unittest.TestCase):\n    def test_add(self):\n        glistjosn = get_json()\n        glistlistdict: List[dict] = json.loads(glistjosn)\n        print(glistlistdict)\n        for g in glistlistdict:\n            self.assertTrue(\"id\" in g.keys(), msg=\"Не верный JSON. Поля id нет в результирующем JSON\")\n            self.assertTrue(\"surname\" in g.keys(), msg=\"Не верный JSON. Поля surname нет в результирующем JSON\")\n            self.assertTrue(\"full_name\" in g.keys(), msg=\"Не верный JSON. Поля full_name нет в результирующем JSON\")\n            self.assertTrue(\"tours_count\" in g.keys(), msg=\"Не верный JSON. Поля tours_count нет в результирующем JSON\")\n            self.assertTrue(\"bio\" in g.keys(), msg=\"Не верный JSON. Поля bio нет в результирующем JSON\")\n            self.assertTrue(\"is_pro\" in g.keys(), msg=\"Не верный JSON. Поля is_pro нет в результирующем JSON\")\n            self.assertTrue(\"company\" in g.keys(), msg=\"Не верный JSON. Поля company нет в результирующем JSON\")\n"
+            },
+            "__init__.py" : {
+              "name" : "__init__.py",
+              "placeholders" : [ ],
+              "is_visible" : false,
+              "text" : ""
+            },
+            "tests/__init__.py" : {
+              "name" : "tests/__init__.py",
+              "placeholders" : [ ],
+              "is_visible" : false,
+              "text" : ""
+            }
+          },
+          "description_text" : "# Задание 1\n\nЕсть данные в объектах моделей.\n\nНеобходимо перегнать данные в JSON с помощью marshmallow\n",
+          "description_format" : "MD",
+          "feedback_link" : {
+            "link_type" : "STEPIK"
+          },
+          "task_type" : "edu"
+        },
+        {
+          "name" : "task3",
+          "files" : {
+            "task.py" : {
+              "name" : "task.py",
+              "placeholders" : [ ],
+              "is_visible" : true,
+              "text" : "import json\n\nfrom flask import Flask\nfrom flask_sqlalchemy import SQLAlchemy\n\napp = Flask(__name__)\ndb = SQLAlchemy(app)\n\n\nclass Guide(db.Model):\n    __tablename__ = 'guide'\n    id = db.Column(db.Integer, primary_key=True)\n    surname = db.Column(db.String)\n    full_name = db.Column(db.String)\n    tours_count = db.Column(db.Integer)\n    bio = db.Column(db.String)\n    is_pro = db.Column(db.Boolean)\n    company = db.Column(db.Integer)\n\n\nguide1 = Guide(id=2, surname='Васечкин', full_name='Андрей Васечкин', tours_count=5,\n               bio='Я обожаю Москву, и изучаю город с необычных ракурсов.', is_pro=True, company=1)\nguide2 = Guide(id=3, surname='Новикова', full_name='Людмила Новикова', tours_count=2,\n               bio='Я петербурженка в 7-м поколении. Люблю делиться историями', is_pro=True, company=2)\nguide3 = Guide(id=4, surname='Беридзе', full_name='Георги Беридзе', tours_count=5,\n               bio='Филолог-журналист по образованию.', is_pro=True, company=None)\n\n\n@app.route(\"/guides_dict\")\ndef guides_dict():\n    r = []\n    for g in [guide1, guide2, guide3]:\n        r.append({\n            \"id\": g.id,\n            \"surname\": g.surname,\n            \"full_name\": g.full_name,\n            \"tours_count\": g.tours_count,\n            \"bio\": g.bio,\n            \"is_pro\": g.is_pro,\n            \"company\": g.company,\n        })\n    return json.dumps(r)\n\n\n@app.route(\"/guides_json\")\ndef guides_json():\n    return\n"
+            },
+            "tests/test_task.py" : {
+              "name" : "tests/test_task.py",
+              "placeholders" : [ ],
+              "is_visible" : false,
+              "text" : "import json\nimport unittest\n\nfrom task import app\n\n\n# todo: replace this with an actual test\nclass TestCase(unittest.TestCase):\n    def test_add(self):\n        with app.app_context():\n            address = \"/guides_json\"\n            app.testing = True\n            response1 = app.test_client().get(address)\n            address = \"/guides_dict\"\n            app.testing = True\n            response2 = app.test_client().get(address)\n        self.assertEqual(response1.status_code, 200, msg=\"Новая вьюшка должна иметь URL /guides_json, видимо случайно удалили\")\n        self.assertEqual(response2.status_code, 200, msg=\"Старая вьюшка с URL /guides_dict куда-то пропала. Верните пожалуйста ее на место\")\n        self.assertEqual(json.loads(response1.data), json.loads(response2.data), msg=\"Не верно сделано преобразование\")"
+            },
+            "__init__.py" : {
+              "name" : "__init__.py",
+              "placeholders" : [ ],
+              "is_visible" : false,
+              "text" : ""
+            },
+            "tests/__init__.py" : {
+              "name" : "tests/__init__.py",
+              "placeholders" : [ ],
+              "is_visible" : false,
+              "text" : ""
+            }
+          },
+          "description_text" : "<html>\n\n<h2>Task Description: Tips & Tricks</h2>\n\n<p>This is a task description file.\nIts content will be displayed to a learner\nin the <strong>Task Description</strong> window.</p>\n\n<p>It supports both Markdown and HTML.\nTo toggle the format, you can rename <strong>task.md</strong>\nto <strong>task.html</strong>, or vice versa.\nThe default task description format can be changed\nin <strong>Preferences | Tools | Education</strong>,\nbut this will not affect any existing task description files.</p>\n\n<p>The following features are available in\n<strong>task.md/task.html</strong>\nwhich are specific to the EduTools plugin:</p>\n\n<ul>\n<li>Hints can be added anywhere in the task text.\nType \"hint\" and press Tab.\nHints should be added to an empty line in the task text.\nIn hints you can use both HTML and Markdown.\n<div class=\"hint\">Text of your hint</div></li>\n\n<li>You may need to refer your learners to a particular lesson,\ntask, or file. To achieve this, you can use the in-course links.\nSpecify the path using the <code>&lt;a href=\"course://lesson1/task1/file1\"&gt;\nlink_text&lt;/a&gt;</code> format.</li><br>\n\n<li>You can insert shortcuts in the task description.\nWhile <strong>task.html/task.md</strong> is open,\nright-click anywhere on the <strong>Editor</strong> tab\nand choose the <strong>Insert shortcut</strong> option\nfrom the context menu.\nFor example: &amp;shortcut:FileStructurePopup;.</li><br>\n\n<li>Insert the &percnt;<code>IDE_NAME</code>&percnt; macro,\nwhich will be replaced by the actual IDE name.\nFor example, <strong>%IDE_NAME%</strong>.</li><br>\n\n<li>Insert PSI elements, by using links like\n<code>&lt;a href=\"psi_element://link.to.element\"&gt;element description&lt;/a&gt;</code>.\nTo get such a link, right-click the class or method\nand select <strong>Copy Reference</strong>.\nThen press &amp;shortcut:EditorPaste;\nto insert the link where appropriate.\nFor example, a\n<a href=\"psi_element://java.lang.String#contains\">link to the \"contains\" method</a>.</li>\n</ul>\n</html>",
+          "description_format" : "HTML",
+          "feedback_link" : {
+            "link_type" : "STEPIK"
+          },
+          "task_type" : "edu"
+        }
+      ],
+      "type" : "lesson"
+    }
+  ],
+  "version" : 11
+}
