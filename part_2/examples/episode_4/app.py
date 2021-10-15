@@ -75,7 +75,7 @@ class User(Resource):
     def put(self, uid: int):
         user = UserDB.query.get(uid)
         req_json = request.json
-        user.name = req_json.get("name")
+        user.title = req_json.get("name")
         user.email = req_json.get("email")
         user.age = req_json.get("age")
         db.session.add(user)
@@ -86,7 +86,7 @@ class User(Resource):
         user = UserDB.query.get(uid)
         req_json = request.json
         if "name" in req_json:
-            user.name = req_json.get("name")
+            user.title = req_json.get("name")
         if "email" in req_json:
             user.email = req_json.get("email")
         if "age" in req_json:

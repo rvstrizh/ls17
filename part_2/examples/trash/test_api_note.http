@@ -1,0 +1,48 @@
+POST http://localhost:5000/notes/
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "Jonatana",
+  "author": "test@test.test",
+  "year": 40
+}
+
+###
+GET http://localhost:5000/notes/
+Accept: application/json
+
+###
+
+GET http://localhost:5000/notes/1
+Accept: application/json
+
+###
+
+PUT http://localhost:5000/notes/1
+Accept: application/json
+Content-Type: application/json
+
+{
+  "text": "sss",
+  "author": "test@test.test"
+}
+
+###
+
+DELETE http://localhost:5000/notes/3
+Accept: application/json
+
+###
+
+PATCH http://localhost:5000/notes/1
+Accept: application/json
+Content-Type: application/json
+
+
+{
+  "id": 1,
+  "name": "fff"
+}
+
+###
