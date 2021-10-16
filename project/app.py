@@ -76,13 +76,12 @@ class MoviesView(Resource):
     def get(self):
         director_id = request.args.get("director_id")
         genre_id = request.args.get("genre_id")
+        t = Movie.query
         if director_id is not None:
-            q = Movie.query.filter(Movie.director_id == director_id)
-        elif genre_id is not None:
-            q = Movie.query.filter(Movie.genre_id == genre_id)
-        else:
-            q = Movie.query
-        all_movies = q.all()
+            t = t.filter(Movie.director_id == director_id)
+        if genre_id is not None:
+            t = t.filter(Movie.genre_id == genre_id)
+        all_movies = t.all()
         return movies_schema.dump(all_movies), 200
 
     def post(self):
