@@ -109,6 +109,8 @@ class MovieView(Resource):
         movie.trailer = req_json.get("trailer")
         movie.year = req_json.get("year")
         movie.rating = req_json.get("rating")
+        movie.genre_id = req_json.get("genre_id")
+        movie.director_id = req_json.get("director_id")
         db.session.add(movie)
         db.session.commit()
         return "", 204
@@ -126,15 +128,20 @@ class MovieView(Resource):
             movie.year = req_json.get("year")
         if "rating" in req_json:
             movie.rating = req_json.get("rating")
+        if "genre_id" in req_json:
+            movie.genre_id = req_json.get("genre_id")
+        if "director_id" in req_json:
+            movie.director_id = req_json.get("director_id")
         db.session.add(movie)
         db.session.commit()
         return "", 204
 
     def delete(self, uid: int):
         movie = Movie.query.get(uid)
+        if not movie:
+            return "", 204
         db.session.delete(movie)
         db.session.commit()
-        return "", 204
 
 
 # ----------------------------------- DIRECTORS ---------------------------------------------------------------
