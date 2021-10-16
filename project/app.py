@@ -18,7 +18,7 @@ class Movie(db.Model):
     description = db.Column(db.String(255))
     trailer = db.Column(db.String(255))
     year = db.Column(db.Integer)
-    rating = db.Column(db.Integer)
+    rating = db.Column(db.Float)
     genre_id = db.Column(db.Integer, db.ForeignKey("genre.id"))
     genre = db.relationship("Genre")
     director_id = db.Column(db.Integer, db.ForeignKey("director.id"))
@@ -31,7 +31,7 @@ class MovieSchema(Schema):
     description = fields.Str()
     trailer = fields.Str()
     year = fields.Int()
-    rating = fields.Int()
+    rating = fields.Float()
 
 
 class Director(db.Model):
@@ -68,53 +68,21 @@ movie_ns = api.namespace('movies')
 director_ns = api.namespace('directors')
 genre_ns = api.namespace('genres')
 
-db.drop_all()
-db.create_all()
-
-# -------------------------------------------------------
-data = {
-    "movies": [],
-    "directors": [],
-    "genres": [],
-}
-# -------------------------------------------------------
-
-for movie in data["movies"]:
-    m = Movie(
-        id=movie["id"],
-        title=movie["title"],
-        description=movie["description"],
-        trailer=movie["trailer"],
-        year=movie["year"],
-        rating=movie["rating"],
-        genre_id=movie["genre_id"],
-        director_id=movie["director_id"],
-    )
-    with db.session.begin():
-        db.session.add(m)
-
-for director in data["directors"]:
-    d = Director(
-        id=director["id"],
-        name=director["name"],
-    )
-    with db.session.begin():
-        db.session.add(d)
-
-for genre in data["genres"]:
-    d = Genre(
-        id=genre["id"],
-        name=genre["name"],
-    )
-    with db.session.begin():
-        db.session.add(d)
 
 # ----------------------------------- MOVIES ---------------------------------------------------------------
 
 @movie_ns.route('/')
 class MoviesView(Resource):
     def get(self):
-        all_movies = Movie.query.all()
+        director_id = request.args.get("director_id")
+        genre_id = request.args.get("genre_id")
+        if director_id is not None:
+            q = Movie.query.filter(Movie.director_id == director_id)
+        elif genre_id is not None:
+            q = Movie.query.filter(Movie.genre_id == genre_id)
+        else:
+            q = Movie.query
+        all_movies = q.all()
         return movies_schema.dump(all_movies), 200
 
     def post(self):
@@ -122,17 +90,16 @@ class MoviesView(Resource):
         new_movie = Movie(**req_json)
         with db.session.begin():
             db.session.add(new_movie)
-        return "", 201
+        return "", 201, {"Location": f"/movies/{new_movie.id}"}
 
 
 @movie_ns.route('/<int:uid>')
 class MovieView(Resource):
     def get(self, uid: int):
-        try:
-            movie = Movie.query.get(uid)
-            return movie_schema.dump(movie), 200
-        except Exception as e:
+        movie = Movie.query.get(uid)
+        if not movie:
             return "", 404
+        return movie_schema.dump(movie), 200
 
     def put(self, uid: int):
         movie = Movie.query.get(uid)
@@ -164,8 +131,8 @@ class MovieView(Resource):
         return "", 204
 
     def delete(self, uid: int):
-        user = Movie.query.get(uid)
-        db.session.delete(user)
+        movie = Movie.query.get(uid)
+        db.session.delete(movie)
         db.session.commit()
         return "", 204
 
@@ -189,16 +156,15 @@ class DirectorsView(Resource):
 @director_ns.route('/<int:uid>')
 class DirectorView(Resource):
     def get(self, uid: int):
-        try:
-            movie = Director.query.get(uid)
-            return movie_schema.dump(movie), 200
-        except Exception as e:
+        director = Director.query.get(uid)
+        if not director:
             return "", 404
+        return director_schema.dump(director), 200
 
     def put(self, uid: int):
         director = Director.query.get(uid)
         req_json = request.json
-        director.title = req_json.get("name")
+        director.name = req_json.get("name")
         db.session.add(director)
         db.session.commit()
         return "", 204
@@ -207,7 +173,7 @@ class DirectorView(Resource):
         director = Director.query.get(uid)
         req_json = request.json
         if "name" in req_json:
-            director.title = req_json.get("name")
+            director.name = req_json.get("name")
         db.session.add(director)
         db.session.commit()
         return "", 204
@@ -224,31 +190,30 @@ class DirectorView(Resource):
 @genre_ns.route('/')
 class GenresView(Resource):
     def get(self):
-        all_users = Genre.query.all()
-        return movies_schema.dump(all_users), 200
+        all_genres = Genre.query.all()
+        return genres_schema.dump(all_genres), 200
 
     def post(self):
         req_json = request.json
-        new_movie = Genre(**req_json)
+        new_genre = Genre(**req_json)
         with db.session.begin():
-            db.session.add(new_movie)
+            db.session.add(new_genre)
         return "", 201
 
 
 @genre_ns.route('/<int:uid>')
 class GenreView(Resource):
     def get(self, uid: int):
-        try:
-            genre = Genre.query.get(uid)
-            return genre_schema.dump(genre), 200
-        except Exception as e:
+        genre = Genre.query.get(uid)
+        if not genre:
             return "", 404
+        return genre_schema.dump(genre), 200
 
     def put(self, uid: int):
-        movie = Genre.query.get(uid)
+        genre = Genre.query.get(uid)
         req_json = request.json
-        movie.title = req_json.get("name")
-        db.session.add(movie)
+        genre.name = req_json.get("name")
+        db.session.add(genre)
         db.session.commit()
         return "", 204
 
@@ -256,7 +221,7 @@ class GenreView(Resource):
         genre = Genre.query.get(uid)
         req_json = request.json
         if "name" in req_json:
-            genre.title = req_json.get("name")
+            genre.name = req_json.get("name")
         db.session.add(genre)
         db.session.commit()
         return "", 204
