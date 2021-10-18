@@ -23,7 +23,7 @@ books = {
 @book_ns.route('/books')
 class BooksView(Resource):
     def get(self):
-        return jsonify(books), 200
+        return books, 200
 
     def post(self):
         req_json = request.json
