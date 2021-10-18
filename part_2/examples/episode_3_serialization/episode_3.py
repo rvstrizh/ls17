@@ -33,7 +33,6 @@ book_ns = api.namespace('')
 b1 = Book(id=1, name="Гарри Поттер", author="Джоан Роулинг", year=1992)
 b2 = Book(id=2, name="Граф Монте Кристо", author="Александр Дюма", year=1854)
 
-db.drop_all()
 db.create_all()
 
 with db.session.begin():
