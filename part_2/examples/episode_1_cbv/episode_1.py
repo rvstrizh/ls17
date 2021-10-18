@@ -12,7 +12,6 @@ books = {
 }
 
 
-@book_ns.route('/')
 class BooksView(Resource):
     def get(self):
         return jsonify(books), 200
@@ -23,7 +22,6 @@ class BooksView(Resource):
         return "", 201
 
 
-@book_ns.route('/<int:bid>')
 class BookView(Resource):
     def get(self, bid):
         return books[bid], 200
