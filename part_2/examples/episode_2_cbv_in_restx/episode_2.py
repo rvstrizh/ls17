@@ -4,7 +4,7 @@ from flask_restx import Api, Resource
 app = Flask(__name__)
 
 api = Api(app)
-book_ns = api.namespace('books')
+book_ns = api.namespace('')
 
 books = {
     1: {
@@ -19,7 +19,8 @@ books = {
     }
 }
 
-@book_ns.route('/')
+
+@book_ns.route('/books')
 class BooksView(Resource):
     def get(self):
         return jsonify(books), 200
@@ -29,7 +30,8 @@ class BooksView(Resource):
         books[len(books) + 1] = req_json
         return "", 201
 
-@book_ns.route('/<int:bid>')
+
+@book_ns.route('/books/<int:bid>')
 class BookView(Resource):
     def get(self, bid):
         return books[bid], 200
